@@ -1,1 +1,34 @@
-<p>note-form works!</p>
+<div class="col-lg-4 mx-auto">
+
+    <div class="card">
+
+        <div class="card-header">
+            Add a note
+        </div>
+
+        <div class="card-body">
+
+            <form (submit)="addNote(description)">
+                
+                <div class="form-group">
+                    <textarea rows="2" class="form-control" placeholder="Note's description" #description required></textarea>
+                </div>
+
+                <div class="form-group my-3">
+                    <!-- event for handling choosing files -->
+                    <input type="file" class="form-control"  (change)="onPhotoSelected($event)" />
+                </div>
+                
+                <div class="d-block my-3 d-flex justify-content-center">
+                    <img [src]="photoSelected || 'assets/no-image.png'" class="img-fluid" alt="No Image" />
+                </div>
+
+                <button class="btn btn-primary">Upload</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
