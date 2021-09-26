@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http'; // import HttpClientModule in app.module.ts 
 
+import Note from '../interfaces/Note';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +22,18 @@ export class NotesService {
 
     return this.http.post(this.URI, data);
 
+  }
+
+  getNotes() {
+
+    return this.http.get<Note[]>(this.URI);
+
+  }
+
+  getNote(id: string) {
+
+    return this.http.get<Note>(`${this.URI}/${id}`);
+    
   }
 
 }

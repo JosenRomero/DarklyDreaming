@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NotesService } from '../../services/notes.service';
 
@@ -10,9 +11,9 @@ import { NotesService } from '../../services/notes.service';
 export class NoteFormComponent implements OnInit {
 
   photoSelected!: string | ArrayBuffer | null;
-  file!: File; // File | null
+  file!: File;
 
-  constructor(private notesService: NotesService) { }
+  constructor(private notesService: NotesService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -39,7 +40,9 @@ export class NoteFormComponent implements OnInit {
 
     this.notesService.createNote(description.value, this.file)
       .subscribe(
-        res => console.log(res), 
+        res => {
+          this.router.navigate(['/notes']);
+        }, 
         err => console.log(err)
       )
 

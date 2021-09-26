@@ -1,5 +1,5 @@
 export default interface Note {
-    _id?: string;
+    _id: string;
     description: string;
     imagePath: string
 }

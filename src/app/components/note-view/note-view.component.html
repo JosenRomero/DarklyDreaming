@@ -1,1 +1,44 @@
-<p>note-view works!</p>
+
+<div class="row" *ngIf="!note; else content">
+    <h5>Loading...</h5>
+</div>
+
+<ng-template #content>
+
+    <div class="row">
+
+        <div class="col-md-5">
+    
+            <div class="card">
+    
+                <img [src]="'http://localhost:3001/' + note.imagePath" class="img-card-top w-100"/>
+    
+            </div>
+    
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="card">
+
+                <form class="card-body">
+
+                    <div class="form-group">
+
+                        <textarea rows="2" class="form-control" placeholder="Note's description" [value]="note.description"></textarea>
+
+                    </div>
+
+                    <button class="btn btn-primary btn-block">Update</button>
+
+                </form>
+
+            </div>
+
+        </div>
+    
+    </div>
+
+    <button class="btn btn-danger">Delete</button>
+
+</ng-template>

@@ -1,1 +1,19 @@
-<p>notes-list works!</p>
+<div class="row">
+
+    <div class="col-md-4 p-4" *ngFor="let note of notes">
+
+        <div class="card card-note" (click)="selectedNote(note._id)">
+
+            <div class="card-body">
+
+                {{note.description}}
+
+            </div>
+
+            <img [src]="'http://localhost:3001/' + note.imagePath" class="img-card-top w-100"/>
+
+        </div>
+
+    </div>
+
+</div>

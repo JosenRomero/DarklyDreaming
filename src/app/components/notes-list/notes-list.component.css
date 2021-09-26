@@ -1,0 +1,7 @@
+.card-note {
+    cursor: pointer;
+}
+
+.card-note:hover {
+    border: 1px solid grey;
+}
