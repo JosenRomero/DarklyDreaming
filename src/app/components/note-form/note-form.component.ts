@@ -36,6 +36,7 @@ export class NoteFormComponent implements OnInit {
 
   }
 
+  // return false;  it Prevents the browsers default behaviour, Prevents the event from bubbling up the DOM
   addNote(description: HTMLTextAreaElement): boolean {
 
     this.notesService.createNote(description.value, this.file)

@@ -24,6 +24,16 @@ export class NotesService {
 
   }
 
+  updateNote(id: string, description: string) {
+
+    const data = {
+      description
+    }
+
+    return this.http.put(`${this.URI}/${id}`, data);
+
+  }
+
   getNotes() {
 
     return this.http.get<Note[]>(this.URI);
@@ -34,6 +44,10 @@ export class NotesService {
 
     return this.http.get<Note>(`${this.URI}/${id}`);
     
+  }
+
+  deleteNote(id: string) {
+    return this.http.delete(`${this.URI}/${id}`);
   }
 
 }

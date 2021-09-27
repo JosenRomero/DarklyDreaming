@@ -21,11 +21,11 @@
 
             <div class="card">
 
-                <form class="card-body">
+                <form (submit)="updateNote(description)" class="card-body">
 
                     <div class="form-group">
 
-                        <textarea rows="2" class="form-control" placeholder="Note's description" [value]="note.description"></textarea>
+                        <textarea rows="2" class="form-control" placeholder="Note's description" [value]="note.description" #description></textarea>
 
                     </div>
 
@@ -39,6 +39,6 @@
     
     </div>
 
-    <button class="btn btn-danger">Delete</button>
+    <button (click)="deleteNote()" class="btn btn-danger">Delete</button>
 
 </ng-template>

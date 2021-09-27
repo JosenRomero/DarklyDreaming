@@ -36,4 +36,33 @@ export class NoteViewComponent implements OnInit {
 
   }
 
+  deleteNote() {
+
+    this.notesService.deleteNote(this.id).subscribe(
+      res => {
+
+        console.log(res);
+
+        this.router.navigate(['/notes']);
+
+      },
+      err => console.log(err)
+    )
+
+  }
+
+  // return false;  it Prevents the browsers default behaviour, Prevents the event from bubbling up the DOM
+  updateNote(description: HTMLTextAreaElement): boolean {
+
+    this.notesService.updateNote(this.id, description.value).subscribe(
+      res => {
+        this.router.navigate(['/notes']);
+      },
+      err => console.log(err)
+    )
+
+    return false;
+
+  }
+
 }
