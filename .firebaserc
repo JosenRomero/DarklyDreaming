@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "darkly-dreaming-app": {
+      "hosting": {
+        "frontend": [
+          "darkly-dreaming-app"
+        ]
+      }
+    }
+  }
+}
