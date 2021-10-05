@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import { FormGroup, FormControl } from '@angular/forms'; // import ReactiveFormsModule in app.module.ts 
 
 import { AuthService } from '../../services/auth.service';
@@ -16,15 +18,26 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onLogin() {
+  async onLogin() {
     
-    const { email, password } = this.loginForm.value;
-    this.authService.login(email, password);
+    try {
+
+      const { email, password } = this.loginForm.value;
+
+      const user = await this.authService.login(email, password);
+
+      if(user) {
+        this.router.navigate(['/notes']);
+      }
+
+    }catch(err){
+      console.log(err);
+    }
 
   }
 

@@ -27,6 +27,9 @@ export class AuthService {
     try {
 
       const newUser = await this.afAuth.createUserWithEmailAndPassword(email, password);
+
+      this.sendVerificationEmail();
+      
       return newUser;
 
     } catch(err) {
@@ -45,6 +48,24 @@ export class AuthService {
       console.log(err)
     }
     
+  }
+
+  async sendVerificationEmail(): Promise<void> {
+
+    try {
+
+      const currentUser = await this.afAuth.currentUser;
+
+      if(currentUser) {
+
+        return await currentUser.sendEmailVerification();
+
+      }
+      
+    }catch(err) {
+      console.log(err);
+    }
+
   }
 
 }

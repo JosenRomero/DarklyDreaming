@@ -6,6 +6,7 @@ import { NoteFormComponent } from './components/note-form/note-form.component';
 import { NoteViewComponent } from './components/note-view/note-view.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SendEmailComponent } from './components/send-email/send-email.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'verification-email',
+    component: SendEmailComponent
   },
   {
     path: '',

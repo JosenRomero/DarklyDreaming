@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { environment } from 'src/environments/environment';
+import { SendEmailComponent } from './components/send-email/send-email.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { environment } from 'src/environments/environment';
     NotesListComponent,
     NoteViewComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SendEmailComponent
   ],
   imports: [
     BrowserModule,
