@@ -2,20 +2,31 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth'; // import AngularFireModule, AngularFireAuthModule in app.module.ts 
 
+import { Observable } from 'rxjs';
+
+import { User } from '../interfaces/User';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth) { }
+  public userData$: Observable<any>;
+
+  constructor(public afAuth: AngularFireAuth) { 
+
+    this.userData$ = this.afAuth.authState;
+    
+  }
 
   async login(email: string, password: string): Promise<any> {
 
     try {
 
-      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      return result;
-
+      const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);
+      
+      return user;
+      
     } catch(err) {
       console.log(err);
     }

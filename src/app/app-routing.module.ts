@@ -9,39 +9,49 @@ import { RegisterComponent } from './components/register/register.component';
 import { SendEmailComponent } from './components/send-email/send-email.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
+import { CheckLoginGuard } from './guards/check-login.guard';
+import { CheckLogoutGuard } from './guards/check-logout.guard';
+
 const routes: Routes = [
-  {
-    path: 'notes',
-    component: NotesListComponent
-  },
-  {
-    path: 'notes/new',
-    component: NoteFormComponent
-  },
-  {
-    path: 'notes/:id',
-    component: NoteViewComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
-  },
-  {
-    path: 'verification-email',
-    component: SendEmailComponent
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent
-  },
   {
     path: '',
     redirectTo: '/notes',
     pathMatch: 'full'
+  },
+  {
+    path: 'notes',
+    component: NotesListComponent,
+    canActivate: [CheckLoginGuard],
+  },
+  {
+    path: 'notes/new',
+    component: NoteFormComponent,
+    canActivate: [CheckLoginGuard],
+  },
+  {
+    path: 'notes/:id',
+    component: NoteViewComponent,
+    canActivate: [CheckLoginGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [CheckLogoutGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [CheckLogoutGuard]
+  },
+  {
+    path: 'verification-email',
+    component: SendEmailComponent,
+    canActivate: [CheckLoginGuard],
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [CheckLogoutGuard]
   }
 ];
 
