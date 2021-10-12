@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth'; // import AngularFireModule, AngularFireAuthModule in app.module.ts 
 
 import { Observable } from 'rxjs';
-
-import { User } from '../interfaces/User';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,12 @@ export class AuthService {
 
     this.userData$ = this.afAuth.authState;
     
+  }
+
+  getUser(): Promise<any> {
+
+    return this.userData$.pipe(first()).toPromise();
+
   }
 
   async login(email: string, password: string): Promise<any> {
@@ -37,11 +42,11 @@ export class AuthService {
 
     try {
 
-      const newUser = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(email, password);
 
       this.sendVerificationEmail();
       
-      return newUser;
+      return user;
 
     } catch(err) {
       console.log(err);

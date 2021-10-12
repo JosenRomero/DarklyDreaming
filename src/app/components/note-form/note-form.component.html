@@ -8,7 +8,7 @@
 
         <div class="card-body">
 
-            <form (submit)="addNote(description)">
+            <form (submit)="addNote($event, description)">
                 
                 <div class="form-group">
                     <textarea rows="2" class="form-control" placeholder="Note's description" #description required></textarea>

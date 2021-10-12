@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NotesService } from '../../services/notes.service';
+import { AuthService } from '../../services/auth.service';
 
 import Note from '../../interfaces/Note';
 
@@ -14,16 +15,28 @@ export class NotesListComponent implements OnInit {
 
   notes: Note[] = [];
 
-  constructor(private notesService: NotesService, private router: Router) { }
+  constructor(private notesService: NotesService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
-    this.notesService.getNotes().subscribe(
-      res => {
-        this.notes = res;
-      },
-      err => console.log(err)
-    )
+    this.getAllUserNotes()
+
+  }
+
+  async getAllUserNotes() {
+
+    const user = await this.authService.getUser();
+
+    if(user) {
+      
+      this.notesService.getNotes(user.uid).subscribe(
+        res => {
+          this.notes = res;
+        },
+        err => console.log(err)
+      )
+
+    }
 
   }
 

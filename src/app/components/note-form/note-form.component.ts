@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NotesService } from '../../services/notes.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-note-form',
@@ -13,7 +14,7 @@ export class NoteFormComponent implements OnInit {
   photoSelected!: string | ArrayBuffer | null;
   file!: File;
 
-  constructor(private notesService: NotesService, private router: Router) { }
+  constructor(private notesService: NotesService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,17 +38,29 @@ export class NoteFormComponent implements OnInit {
   }
 
   // return false;  it Prevents the browsers default behaviour, Prevents the event from bubbling up the DOM
-  addNote(description: HTMLTextAreaElement): boolean {
+  async addNote(e: Event, description: HTMLTextAreaElement) {
 
-    this.notesService.createNote(description.value, this.file)
-      .subscribe(
-        res => {
-          this.router.navigate(['/notes']);
-        }, 
-        err => console.log(err)
-      )
+    try {
 
-    return false;
+      const user = await this.authService.getUser();
+
+      if(user) {
+      
+        this.notesService.createNote(user.uid, description.value, this.file)
+          .subscribe(
+            res => {
+              this.router.navigate(['/notes']);
+            }, 
+            err => console.log(err)
+          )
+
+      }
+
+      e.preventDefault();
+
+    }catch(err) {
+      console.log(err)
+    } 
 
   }
 

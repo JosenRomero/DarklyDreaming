@@ -13,10 +13,11 @@ export class NotesService {
 
   constructor(private http: HttpClient) { }
 
-  createNote(description: string, photo: File) {
+  createNote(userId: string, description: string, photo: File) {
 
     const data = new FormData();
 
+    data.append('userId', userId);
     data.append('description', description);
     data.append('image', photo);
 
@@ -34,9 +35,9 @@ export class NotesService {
 
   }
 
-  getNotes() {
+  getNotes(userId: string) {
 
-    return this.http.get<Note[]>(this.URI);
+    return this.http.get<Note[]>(`${this.URI}/all/userId/${userId}`);
 
   }
 
