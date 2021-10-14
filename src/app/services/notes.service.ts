@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http'; // import HttpClientModule in
 
 import Note from '../interfaces/Note';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
 
-  URI = 'http://localhost:3001/api/note';
+  URI = `${environment.API_URL}/api/note`;
 
   constructor(private http: HttpClient) { }
 

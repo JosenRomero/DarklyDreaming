@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { FormGroup, FormControl } from '@angular/forms'; // import ReactiveFormsModule in app.module.ts 
+
 import { NotesService } from '../../services/notes.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,6 +15,10 @@ export class NoteFormComponent implements OnInit {
 
   photoSelected!: string | ArrayBuffer | null;
   file!: File;
+
+  noteForm = new FormGroup({
+    description: new FormControl('')
+  });
 
   constructor(private notesService: NotesService, private authService: AuthService, private router: Router) { }
 
@@ -38,15 +44,17 @@ export class NoteFormComponent implements OnInit {
   }
 
   // return false;  it Prevents the browsers default behaviour, Prevents the event from bubbling up the DOM
-  async addNote(e: Event, description: HTMLTextAreaElement) {
+  async addNote(): Promise<boolean | any> {
 
     try {
+
+      const { description } = this.noteForm.value;
 
       const user = await this.authService.getUser();
 
       if(user) {
       
-        this.notesService.createNote(user.uid, description.value, this.file)
+        this.notesService.createNote(user.uid, description, this.file)
           .subscribe(
             res => {
               this.router.navigate(['/notes']);
@@ -56,10 +64,10 @@ export class NoteFormComponent implements OnInit {
 
       }
 
-      e.preventDefault();
+      return false;
 
     }catch(err) {
-      console.log(err)
+      console.log(err);
     } 
 
   }
