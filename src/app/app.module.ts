@@ -19,6 +19,15 @@ import { environment } from 'src/environments/environment';
 import { SendEmailComponent } from './components/send-email/send-email.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
+const firebaseConfig = {
+  apiKey: environment.apiKey,
+  authDomain: environment.authDomain,
+  projectId: environment.projectId,
+  storageBucket: environment.storageBucket,
+  messagingSenderId: environment.messagingSenderId,
+  appId: environment.appId
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +45,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
   ],
   providers: [],
