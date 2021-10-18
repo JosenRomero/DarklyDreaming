@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'; // import HttpClientModule in
 
 import Note from '../interfaces/Note';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

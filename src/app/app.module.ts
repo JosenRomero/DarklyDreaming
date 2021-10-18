@@ -15,7 +15,7 @@ import { NoteViewComponent } from './components/note-view/note-view.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment.prod';
 import { SendEmailComponent } from './components/send-email/send-email.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
